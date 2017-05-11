@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersRequest;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -27,7 +28,10 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        return view('/admin/users/create');
+
+        //izvlačimo iz baze parametre name, id te ih pretvaramo u array
+        $roles = Role::lists('name','id')->all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -36,9 +40,19 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        //
+        /*REQUEST
+        $requests represents all the data that you're sending from,let's say,a form, if you have a form, and you press submit,
+        if it is form of method POST,then also the HTTP request will be of POST also.
+        TYPE HINTING
+        And by type hinting it in your method, like public function store(Request $request), laravel behind scenes automatically injects it by the service container ,
+        so your $request holds all the data from the HTTP request that you sent to that method.
+
+        Long story short,all that you need to know is that $requests hold all the
+        data from a particular request that you're sending to that particular method.*/
+
+        return $request->all();
     }
 
     /**
