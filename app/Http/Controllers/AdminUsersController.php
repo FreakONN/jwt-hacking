@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,10 +17,9 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        //ili return view('admin.users.index');
-        return view('/admin/users/index');
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -48,7 +49,7 @@ class AdminUsersController extends Controller
      */
     public function show($id)
     {
-        return view('/admin/users/show');
+        //return view('/admin/users/show');
     }
 
     /**

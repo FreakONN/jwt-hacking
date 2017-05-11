@@ -31,7 +31,8 @@ class User extends Authenticatable
  * Now, let's define a relationship on the Phone model that will let us access the User that owns the phone.
  * We can define the inverse of a hasOne relationship using the belongsTo method:
 */
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo('App\Role');
     }
 
