@@ -55,6 +55,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    {{ Auth::user()->name }}
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -133,6 +134,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+{{--
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
@@ -180,11 +182,12 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+--}}
 
 
 
 
-
+{{--
 
 
                     <li>
@@ -228,8 +231,8 @@
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li>
-                    <li>
+                    </li>--}}
+        {{--            <li>
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -258,8 +261,8 @@
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li>
-                    <li class="active">
+                    </li>--}}
+               {{--     <li class="active">
                         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -271,7 +274,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                </ul>
+                </ul>--}}
 
 
             </div>
@@ -293,6 +296,7 @@
 
 
 
+{{--
 
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
@@ -308,6 +312,7 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+--}}
 
 
 

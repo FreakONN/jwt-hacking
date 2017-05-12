@@ -24,6 +24,8 @@ class UsersRequest extends Request
     public function rules()
     {
         return [
+            //
+
             'name'=> 'required',
             'email'=>'required',
             'role_id'=>'required',
