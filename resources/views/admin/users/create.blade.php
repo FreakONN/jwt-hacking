@@ -34,10 +34,12 @@
         {!! Form::select('is_active', array(1 => 'Active', 0=> 'Not Active'), 0 , ['class'=>'form-control'])!!}
     </div>
 
+
     <div class="form-group">
         {!! Form::label('photo_id', 'Photo:') !!}
         {!! Form::file('photo_id', null, ['class'=>'form-control'])!!}
     </div>
+
 
 
     <div class="form-group">
@@ -52,6 +54,9 @@
 
     {!! Form::close() !!}
 
-{{--želimo includati eroore ako polja nisu popunjena--}}
+
     @include('includes.form_error')
+
+
+
 @stop

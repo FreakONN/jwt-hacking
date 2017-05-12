@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
+use App\Photo;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -29,8 +31,10 @@ class AdminUsersController extends Controller
     public function create()
     {
 
-        //izvlačimo iz baze parametre name, id te ih pretvaramo u array
+        //izvlačimo iz baze parametre name, id te ih pretvaramo u array, all ih sve stavlja van
         $roles = Role::lists('name','id')->all();
+        //$roles = Role::pluck('name','id')->all();
+
         return view('admin.users.create', compact('roles'));
     }
 
@@ -52,8 +56,25 @@ class AdminUsersController extends Controller
         Long story short,all that you need to know is that $requests hold all the
         data from a particular request that you're sending to that particular method.*/
 
-        return $request->all();
+        if(trim($request->password) == ''){
+            $input = $request->except('password');
+        } else{
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
+
+        if($file = $request->file('photo_id')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        User::create($input);
+        return redirect('/admin/users');
+//        return $request->all();
+
     }
+
 
     /**
      * Display the specified resource.
@@ -74,7 +95,9 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view('/admin/users/edit');
+        $user = User::findOrFail($id);
+        $roles = Role::lists('name', 'id')->all();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -84,10 +107,26 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
-        //
-    }
+        //sličan storeu!!!
+
+        //pronađi korisnika
+        $user = User::findOrFail($id);
+
+        //detektiraj slike korisnika
+
+        $input = $request->all(); //zatraži sve od korisnika s $id-om
+
+        if($file = $request->file('photo_id')){ //checking for the file
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name); //pomakni podatak u folder
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        $user->update($input);
+        return redirect('/admin/users');
+        }
 
     /**
      * Remove the specified resource from storage.

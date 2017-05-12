@@ -2,7 +2,6 @@
 
 namespace App;
 
-use function foo\func;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -21,19 +20,94 @@ class User extends Authenticatable
      *
      * @var array
      */
-
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-/*
- * So, we can access the Phone model from our User.
- * Now, let's define a relationship on the Phone model that will let us access the User that owns the phone.
- * We can define the inverse of a hasOne relationship using the belongsTo method:
-*/
-    public function role()
-    {
+
+
+    public function role(){
+
         return $this->belongsTo('App\Role');
+
+
     }
+
+
+
+    public function photo(){
+
+
+        return $this->belongsTo('App\Photo');
+
+
+    }
+
+
+
+
+//    public function setPasswordAttribute($password){
+//
+//
+//        if(!empty($password)){
+//
+//
+//            $this->attributes['password'] = bcrypt($password);
+//
+//
+//        }
+//
+//
+//        $this->attributes['password'] = $password;
+//
+//
+//
+//
+//    }
+/*
+
+
+
+    public function isAdmin(){
+
+
+        if($this->role->name  == "administrator" && $this->is_active == 1){
+
+
+            return true;
+
+        }
+
+
+        return false;
+
+
+
+    }
+
+
+
+    public function posts(){
+
+
+        return $this->hasMany('App\Post');
+
+
+    }
+
+
+
+    public function getGravatarAttribute(){
+
+
+        $hash = md5(strtolower(trim($this->attributes['email']))) . "?d=mm&s=";
+        return "http://www.gravatar.com/avatar/$hash";
+
+
+    }
+
+
+*/
+
 
 }
